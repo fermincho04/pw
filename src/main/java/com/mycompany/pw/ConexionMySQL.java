@@ -15,7 +15,7 @@ public class ConexionMySQL {
     public String driver = "com.mysql.cj.jdbc.Driver";
 
     // Nombre de la base de datos
-    public String database = "cachi";
+    public String database = "burritos";
 
     // Host
     public String hostname = "localhost";
