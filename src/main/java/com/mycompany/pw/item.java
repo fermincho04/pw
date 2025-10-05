@@ -9,23 +9,23 @@ package com.mycompany.pw;
  * @author Fer_ITM
  */
 public class item {
-     private String nombre;
-    private double precio;
+     private String Nombre;
+    private double Precio;
 
     // Constructor para crear un nuevo item
     public item(String nombre, double precio) {
-        this.nombre = nombre;
-        this.precio = precio;
+        this.Nombre = nombre;
+        this.Precio = precio;
     }
 
     // Método para obtener el nombre
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
     // Método para obtener el precio
     public double getPrecio() {
-        return precio;
+        return Precio;
     }
     
 }

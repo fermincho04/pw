@@ -9,36 +9,20 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
-// Agrega esta línea al inicio del archivo si no la tienes,
-// para poder usar listas.
 import java.util.ArrayList;
 
-// ... (aquí va el resto de tu clase: getConnection, etc.)
 /**
  *
  * @author Fer_ITM
  */
 public class ConexionMySQL {
-    // Librería de MySQL
     public String driver = "com.mysql.cj.jdbc.Driver";
-
-    // Nombre de la base de datos
     public String database = "burritos";
-
-    // Host
     public String hostname = "localhost";
-
-    // Puerto
     public String port = "3306";
-
-    // Ruta de nuestra base de datos (desactivamos el uso de SSL con "?useSSL=false")
     public String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database 
                         + "?useSSL=false&serverTimezone=UTC";
-
-    // Nombre de usuario
     public String username = "root";
-
-    // Clave de usuario
     public String password = "";
 
     
@@ -66,60 +50,50 @@ public class ConexionMySQL {
         return cn;
     } 
     
-    public ArrayList<item> obtenerBurritos() {
-    ArrayList<item> burritos = new ArrayList<>();
-    // Asegúrate de que tu método de conexión se llame getConnection() o ajústalo.
-    Connection conn = this.getConnection(); 
-    if (conn == null) return burritos;
+        public ArrayList<item> obtenerBurritos() {
+        ArrayList<item> burritos = new ArrayList<>();
+        // Usamos tu método de conexión
+        Connection conn = this.conectarMySQL(); 
+        if (conn == null) return burritos;
 
-    try {
-        String query = "SELECT nombre, precio FROM BurritoID"; // Usamos el nombre de tu tabla
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(query);
+        try {
+            String query = "SELECT nombre, precio FROM tipodeburro";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
 
-        while (rs.next()) {
-            String nombre = rs.getString("nombre");
-            double precio = rs.getDouble("precio");
-            burritos.add(new item(nombre, precio));
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                double precio = rs.getDouble("precio");
+                burritos.add(new item(nombre, precio));
+            }
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
-        rs.close();
-        st.close();
-        conn.close();
-    } catch (Exception e) {
-        System.out.println("Error al consultar burritos: " + e.getMessage());
+        return burritos;
     }
-    return burritos;
-}
-
-/**
- * Obtiene todas las bebidas de la base de datos.
- * @return Una lista de objetos ItemMenu con las bebidas.
- */
-public ArrayList<item> obtenerBebidas() {
-    ArrayList<item> bebidas = new ArrayList<>();
-    Connection conn = this.getConnection();
-    if (conn == null) return bebidas;
-
-    try {
-        String query = "SELECT nombre, precio FROM BebidasID"; // Usamos el nombre de tu tabla
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(query);
-
-        while (rs.next()) {
-            String nombre = rs.getString("nombre");
-            double precio = rs.getDouble("precio");
-            bebidas.add(new item(nombre, precio));
+    
+    public ArrayList<item> obtenerBebidas() {
+        ArrayList<item> bebidas = new ArrayList<>();
+        Connection conn = this.conectarMySQL();
+        if (conn == null) return bebidas;
+    
+        try {
+            String query = "SELECT nombre, precio FROM bebidas";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+    
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                double precio = rs.getDouble("precio");
+                bebidas.add(new item(nombre, precio));
+            }
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
-        rs.close();
-        st.close();
-        conn.close();
-    } catch (Exception e) {
-        System.out.println("Error al consultar bebidas: " + e.getMessage());
+        return bebidas;
     }
-    return bebidas;
-}
 
     
 }
