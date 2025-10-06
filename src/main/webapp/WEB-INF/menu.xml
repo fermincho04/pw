@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+    <categoria nombre="Burritos">
+        <item>
+            <nombre>Burrito de Arrachera</nombre>
+            <precio>120.00</precio>
+            <descripcion>Arrachera a la parrilla con guacamole y frijoles.</descripcion>
+        </item>
+        <item>
+            <nombre>Burrito al Pastor</nombre>
+            <precio>95.50</precio>
+            <descripcion>Carne al pastor con piña, cilantro y cebolla.</descripcion>
+        </item>
+    </categoria>
+    
+    <categoria nombre="Bebidas">
+        <item>
+            <nombre>Agua de Horchata</nombre>
+            <precio>35.00</precio>
+            <descripcion>Refrescante agua de arroz con canela.</descripcion>
+        </item>
+        <item>
+            <nombre>Agua de Jamaica</nombre>
+            <precio>35.00</precio>
+            <descripcion>Agua fresca de flor de jamaica.</descripcion>
+        </item>
+    </categoria>
+</menu>
