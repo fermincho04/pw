@@ -95,3 +95,60 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
         max-width: 50%; 
         border-radius: 8px;
     }
+    
+    .form-gestion {
+        margin-top: 20px;
+    }
+
+    .form-gestion fieldset {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .form-gestion legend {
+        font-weight: bold;
+        padding: 0 10px;
+        color: #4267B2;
+    }
+
+    .form-gestion label {
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+
+    .form-gestion input[type="text"],
+    .form-gestion input[type="number"],
+    .form-gestion select,
+    .form-gestion textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    }
+
+    .form-gestion textarea {
+        resize: vertical; /* Permite al usuario cambiar la altura */
+    }
+
+    .form-botones {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .btn-agregar { background-color: #4CAF50; /* Verde */ }
+    .btn-modificar { background-color: #f0ad4e; /* Naranja */ }
+    .btn-eliminar { background-color: #d9534f; /* Rojo */ }
