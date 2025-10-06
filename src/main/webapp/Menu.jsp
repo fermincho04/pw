@@ -57,7 +57,15 @@
 
             </main>
         </div>
-        <img src="imagenes\pork-burrito.jpg" alt="Imagen decorativa del menú" width="400">
+            <main>
+                <h2>¡Los mejores burritos de la ciudad!</h2>
+                <img src="imagenes\pork-burrito.jpg" alt="Imagen decorativa del menú" class="imagen-centrada">
+                <p>
+                    Bienvenidos a nuestro sitio. Explora nuestro menú...
+                </p>
+            </main>
+            
+        
 
     </body>
 </html>
