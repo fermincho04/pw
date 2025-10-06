@@ -15,7 +15,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Nuestro Menú</title>
-        <link rel="stylesheet" href="css/estilos.css">
+        <link rel="stylesheet" href="CSS/estilos.css">
     </head>
     <body>
 
@@ -30,35 +30,34 @@
 
             </header>
             <p>¡Todo preparado al momento con los mejores ingredientes!</p>
-
-            <img src="imagen.png" alt="Imagen decorativa del menú" width="400">
         </header>
-
-        <main>
             <%
                 ConexionMySQL db = new ConexionMySQL();
                 ArrayList<item> listaBurritos = db.obtenerBurritos();
                 ArrayList<item> listaBebidas = db.obtenerBebidas();
             %>
-
-            <h2>Burritos</h2>
-            <ul>
+        
+        <div class="container">
+        <main class="main-content">
+            <aside class="sidebar-column card">
+                <h3>Burritos</h3>
                 <%
                     for (item burrito : listaBurritos) {
-                        out.println("<li>" + burrito.getNombre() + " - $" + burrito.getPrecio() + "</li>");
+                        out.println(burrito.getNombre()+ " " + burrito.getPrecio());
                     }
                 %>
-            </ul>
-
-            <h2>Bebidas</h2>
-            <ul>
+                <hr>
+                <h3>Bebidas</h3>
                 <%
                     for (item bebida : listaBebidas) {
-                        out.println("<li>" + bebida.getNombre() + " - $" + bebida.getPrecio() + "</li>");
+                        out.println(bebida.getNombre()+ " " + bebida.getPrecio());
                     }
                 %>
-            </ul>
-        </main>
+            </aside>
+
+            </main>
+        </div>
+        <img src="imagenes\pork-burrito.jpg" alt="Imagen decorativa del menú" width="400">
 
     </body>
 </html>
