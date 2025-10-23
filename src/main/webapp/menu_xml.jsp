@@ -56,7 +56,7 @@
     </div>
 
     <footer>
-            <p>&copy; 2025 Tuburro - Todos los derechos reservados.</p>
+            <p>&copy; 2025 Burritows - Todos los derechos reservados.</p>
 
             <div>
                 <a href="https://validator.w3.org/check?uri=referer" target="_blank">

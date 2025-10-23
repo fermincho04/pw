@@ -4,6 +4,8 @@
         <title>Burritows</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="CSS/estilos.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        
     </head>
     <body>
         <h1>Bienvenidos a Burritows</h1>
@@ -16,6 +18,15 @@
                 </nav>
 
         </header>
+        <aside class="sidebar-column card">
+            <button id="btnTogglePromo" style="float:right;">Ocultar</button>
+            <h3>¡Promoción del día!</h3>
+            <div id="promoContenido">
+                <p>En la compra de cualquier burrito, llévate un agua fresca ¡GRATIS!</p>
+            </div>
+            <hr>
+            ...
+        </aside>
         <div class="container">
         <main class="main-content">
             <aside class="sidebar-column card">
@@ -44,6 +55,22 @@
                 </a>
             </div>
         </footer>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#btnTogglePromo").click(function(){
+                    // Alterna la visibilidad del contenido
+                    $("#promoContenido").toggle(); 
+
+                    // Cambia el texto del botón
+                    if ($("#promoContenido").is(":visible")) {
+                        $(this).text("Ocultar");
+                    } else {
+                        $(this).text("Mostrar");
+                    }
+                });
+            });
+        </script>
 
     </body>
 </html>

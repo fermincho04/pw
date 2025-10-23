@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestionar Menú - Tuburro</title>
-    <link rel="stylesheet" href="CSS/estilos.css">
+    <title>Gestionar Menú - Burritows</title> <link rel="stylesheet" href="CSS/estilos.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
 </head>
 <body>
     <header>
@@ -12,7 +14,8 @@
             <a href="index.html">Inicio</a>
             <a href="menu_xml.jsp">Menú</a>
             <a href="contacto.html">Contacto</a>
-            <a href="gestionar.html">Gestionar</a> </nav>
+            <a href="gestionar.html">Gestionar</a> 
+        </nav>
     </header>
 
     <div class="container">
@@ -51,5 +54,43 @@
 
     <footer>
         </footer>
+
+    <script>
+        $(document).ready(function() {
+            
+            // Div para mostrar errores (lo añade con jQuery)
+            $(".form-gestion").prepend('<div id="mensajes-error" style="color:red; margin-bottom:15px; font-weight:bold;"></div>');
+
+            // Captura el evento 'submit' del formulario
+            $(".form-gestion").submit(function(event) {
+                
+                $("#mensajes-error").html(""); 
+                let nombre = $("#nombre").val().trim();
+                let precio = $("#precio").val().trim();
+                
+                let esValido = true;
+                let errores = [];
+
+                if (nombre === "") {
+                    errores.push("El nombre del producto no puede estar vacío.");
+                    esValido = false;
+                }
+                
+                if (precio === "") {
+                    errores.push("El precio no puede estar vacío.");
+                    esValido = false;
+                } else if (isNaN(precio) || parseFloat(precio) <= 0) {
+                    errores.push("El precio debe ser un número mayor a cero.");
+                    esValido = false;
+                }
+
+                if (!esValido) {
+                    event.preventDefault(); // ¡Detiene el envío del formulario!
+                    $("#mensajes-error").html(errores.join("<br>"));
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>
