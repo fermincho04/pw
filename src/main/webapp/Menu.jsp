@@ -11,61 +11,69 @@
 
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Nuestro Menú</title>
-        <link rel="stylesheet" href="CSS/estilos.css">
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Menú</title>
+    <link rel="stylesheet" href="CSS/estilos.css">
+</head>
+<body>
 
-        <header>
-            <h1>Nuestro Menú</h1>
-            <header>
-                <nav>
-                    <a href="index.html">Inicio</a>
-                    <a href="Menu.jsp">Menú</a>
-                    <a href="contacto.html">Contacto</a>
-                    </nav>
+<header>
+    <h1>Nuestro Menú</h1>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="Menu.jsp">Menú</a>
+        <a href="contacto.html">Contacto</a>
+    </nav>
+    <p>¡Todo preparado al momento con los mejores ingredientes!</p>
+</header>
 
-            </header>
-            <p>¡Todo preparado al momento con los mejores ingredientes!</p>
-        </header>
+<%
+    ConexionMySQL db = new ConexionMySQL();
+    ArrayList<item> listaBurritos = db.obtenerBurritos();
+    ArrayList<item> listaBebidas = db.obtenerBebidas();
+%>
+
+<div class="container">
+    <main class="main-content">
+        <aside class="sidebar-column card">
+            <h3>Burritos</h3>
             <%
-                ConexionMySQL db = new ConexionMySQL();
-                ArrayList<item> listaBurritos = db.obtenerBurritos();
-                ArrayList<item> listaBebidas = db.obtenerBebidas();
+                for (item burrito : listaBurritos) {
+                    out.println("<p>" + burrito.getNombre() + " $" + burrito.getPrecio() + "</p>");
+                }
             %>
-        
-        <div class="container">
-        <main class="main-content">
-            <aside class="sidebar-column card">
-                <h3>Burritos</h3>
-                <%
-                    for (item burrito : listaBurritos) {
-                        out.println(burrito.getNombre()+ " " + burrito.getPrecio());
-                    }
-                %>
-                <hr>
-                <h3>Bebidas</h3>
-                <%
-                    for (item bebida : listaBebidas) {
-                        out.println(bebida.getNombre()+ " " + bebida.getPrecio());
-                    }
-                %>
-            </aside>
+            <hr>
+            <h3>Bebidas</h3>
+            <%
+                for (item bebida : listaBebidas) {
+                    out.println("<p>" + bebida.getNombre() + " $" + bebida.getPrecio() + "</p>");
+                }
+            %>
+        </aside>
+    </main>
+</div>
 
-            </main>
-        </div>
-            <main>
-                <h2>¡Los mejores burritos de la ciudad!</h2>
-                <img src="imagenes\pork-burrito.jpg" alt="Imagen decorativa del menú" class="imagen-centrada">
-                <p>
-                    Bienvenidos a nuestro sitio. Explora nuestro menú...
-                </p>
-            </main>
-            
-        
+<main>
+    <h2>¡Los mejores burritos de la ciudad!</h2>
+    <img src="imagenes/pork-burrito.jpg" alt="Imagen decorativa del menú" class="imagen-centrada">
+    <p>
+        Bienvenidos a nuestro sitio. Explora nuestro menú y disfruta de sabores únicos.
+    </p>
+</main>
 
-    </body>
+<div class="acciones-menu">
+    <button id="toggleBurritos">Mostrar/Ocultar Burritos</button>
+    <button id="toggleBebidas">Mostrar/Ocultar Bebidas</button>
+</div>
+
+<!-- Si quieres mostrar los productos guardados desde gestionar.html -->
+<div id="lista-menu-js"></div>
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+</body>
 </html>

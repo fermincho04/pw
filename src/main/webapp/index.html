@@ -59,10 +59,8 @@
         <script>
             $(document).ready(function(){
                 $("#btnTogglePromo").click(function(){
-                    // Alterna la visibilidad del contenido
                     $("#promoContenido").toggle(); 
 
-                    // Cambia el texto del botón
                     if ($("#promoContenido").is(":visible")) {
                         $(this).text("Ocultar");
                     } else {

@@ -91,6 +91,50 @@
             });
         });
     </script>
+    
+    <script>
+    $(document).ready(function() {
+        const formulario = $(".form-gestion");
+
+        formulario.on("submit", function(e) {
+            e.preventDefault();
+
+            let nombre = $("#nombre").val().trim();
+            let precio = parseFloat($("#precio").val().trim());
+            let descripcion = $("#descripcion").val().trim();
+            let categoria = $("#categoria").val();
+
+            let errores = [];
+
+            if (nombre === "") errores.push("El nombre no puede estar vacío.");
+            if (isNaN(precio) || precio <= 0) errores.push("El precio debe ser mayor a 0.");
+
+            $("#mensajes-error").html(""); 
+
+            if (errores.length > 0) {
+                $("#mensajes-error").html(errores.join("<br>"));
+                return;
+            }
+
+            const nuevoItem = {
+                id: Date.now(),
+                categoria: categoria,
+                nombre: nombre,
+                precio: precio,
+                descripcion: descripcion
+            };
+
+            let menu = JSON.parse(localStorage.getItem("menuBurritows")) || [];
+            menu.push(nuevoItem);
+            localStorage.setItem("menuBurritows", JSON.stringify(menu));
+
+            alert("Producto agregado al menú con éxito ✅");
+
+            formulario[0].reset();
+        });
+    });
+    </script>
+
 
 </body>
 </html>
