@@ -9,7 +9,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.security.MessageDigest;
+
+
+
+
 
 /**
  *
@@ -24,7 +30,6 @@ public class ConexionMySQL {
                         + "?useSSL=false&serverTimezone=UTC";
     public String username = "root";
     public String password = "";
-
     
     public Connection conectarMySQL() {
         Connection conn = null;
@@ -38,17 +43,6 @@ public class ConexionMySQL {
 
         return conn;
     }
-    
-    public Connection getConnection() {
-        Connection cn = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/burritos", "root", ""); // Ajusta tus credenciales
-        } catch (Exception e) {
-            System.out.println("Error de conexión: " + e.getMessage());
-        }
-        return cn;
-    } 
     
         public ArrayList<item> obtenerBurritos() {
         ArrayList<item> burritos = new ArrayList<>();
@@ -95,5 +89,201 @@ public class ConexionMySQL {
         return bebidas;
     }
 
+        // Cifrar contraseña con SHA-256
+    public static String hashPassword(String passwordPlano) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = md.digest(passwordPlano.getBytes("UTF-8"));
+
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashBytes) {
+                sb.append(String.format("%02x", b)); // convierte a hex
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     
+        public boolean registrarUsuario(String nombre, String passwordPlano, String rol) {
+            Connection conn = null;
+            PreparedStatement ps = null;
+
+            try {
+                conn = conectarMySQL();
+                if (conn == null) {
+                    return false;
+                }
+
+                String sql = "INSERT INTO usuarios (nombre, password, rol) VALUES (?, ?, ?)";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, nombre);
+                ps.setString(2, hashPassword(passwordPlano)); // guardamos el hash
+                ps.setString(3, rol);
+
+                int filas = ps.executeUpdate();
+                return filas > 0;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            } finally {
+                try {
+                    if (ps != null) ps.close();
+                    if (conn != null) conn.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+        public ArrayList<Usuario> obtenerUsuarios() {
+            ArrayList<Usuario> usuarios = new ArrayList<>();
+            Connection conn = null;
+            Statement st = null;
+            ResultSet rs = null;
+
+            try {
+                conn = conectarMySQL();
+                if (conn == null) {
+                    return usuarios;
+                }
+
+                String sql = "SELECT id, nombre, password, rol FROM usuarios";
+                st = conn.createStatement();
+                rs = st.executeQuery(sql);
+
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String nombre = rs.getString("nombre");
+                    String pass = rs.getString("password");
+                    String rol = rs.getString("rol");
+
+                    usuarios.add(new Usuario(id, nombre, pass, rol));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (rs != null) rs.close();
+                    if (st != null) st.close();
+                    if (conn != null) conn.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            return usuarios;
+        }
+
+        public boolean eliminarUsuario(int idUsuario) {
+            Connection conn = null;
+            PreparedStatement ps = null;
+
+            try {
+                conn = conectarMySQL();
+                if (conn == null) {
+                    return false;
+                }
+
+                String sql = "DELETE FROM usuarios WHERE id = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, idUsuario);
+
+                int filas = ps.executeUpdate();
+                return filas > 0;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            } finally {
+                try {
+                    if (ps != null) ps.close();
+                    if (conn != null) conn.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+    public Usuario validarUsuario(String nombre, String passwordPlano) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = conectarMySQL();
+            if (conn == null) {
+                return null;
+            }
+
+            String sql = "SELECT id, nombre, password, rol FROM usuarios WHERE nombre = ? AND password = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ps.setString(2, hashPassword(passwordPlano)); // comparamos contra el hash
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String nom = rs.getString("nombre");
+                String pass = rs.getString("password");
+                String rol = rs.getString("rol");
+
+                // Usuario es la clase que creamos para manejar usuarios
+                return new Usuario(id, nom, pass, rol);
+            } else {
+                // usuario o contraseña incorrectos
+                return null;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+        public boolean existeUsuario(String nombre) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = conectarMySQL();
+            if (conn == null) {
+                return false;
+            }
+
+            String sql = "SELECT id FROM usuarios WHERE nombre = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, nombre);
+
+            rs = ps.executeQuery();
+            // si hay al menos un resultado, el usuario ya existe
+            return rs.next();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conn != null) conn.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+
 }
