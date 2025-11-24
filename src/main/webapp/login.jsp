@@ -1,7 +1,7 @@
 <%-- 
     Document   : login
-    Created on : 23 nov 2025, 21:22:41
-    Author     : Fer_ITM
+    Created on : 19 nov 2025, 21:22:41
+    Author     : EsthelaHC
 --%>
 
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
@@ -29,17 +29,15 @@
             Usuario u = db.validarUsuario(nombre, password);
 
             if (u != null) {
-                // Login correcto: guardamos datos en la sesión
                 session.setAttribute("usuarioNombre", u.getNombre());
                 session.setAttribute("usuarioRol", u.getRol());
 
-                // Si es admin lo mandamos a gestionar, si no al inicio
                 if ("admin".equals(u.getRol())) {
                     response.sendRedirect("gestionar.jsp");
                 } else {
                     response.sendRedirect("index.html");
                 }
-                return; // importante para que no siga dibujando HTML
+                return;
             } else {
                 mensaje = "Usuario o contraseña incorrectos.";
                 tipoMensaje = "error";
