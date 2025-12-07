@@ -21,18 +21,16 @@
 
         <header>
             <h1>Nuestro Menú</h1>
-            <header>
-                <nav>
-                    <a href="index.html">Inicio</a>
-                    <a href="Menu.jsp">Menú</a>
-                    <a href="contacto.html">Contacto</a>
-                    <a href="cuenta.jsp">Cuenta</a>
-                    <a href="login.jsp">Iniciar sesión</a>
-                    </nav>
-
-            </header>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="Menu.jsp">Menú</a>
+                <a href="contacto.html">Contacto</a>
+                <a href="cuenta.jsp">Cuenta</a>
+                <a href="login.jsp">Iniciar sesión</a>
+            </nav>
             <p>¡Todo preparado al momento con los mejores ingredientes!</p>
         </header>
+
             <%
                 ConexionMySQL db = new ConexionMySQL();
                 ArrayList<item> listaBurritos = db.obtenerBurritos();
@@ -61,8 +59,8 @@
 
             </main>
         </div>
-        <img src="imagenes\pork-burrito.jpg" alt="Imagen decorativa del menú" width="400">
-        
+        <img src="imagenes/pork-burrito.jpg" alt="Imagen decorativa del menú" width="400" class="imagen-centrada">
+
         
         <footer>
             <p>&copy; 2025 Burritows - Todos los derechos reservados.</p>

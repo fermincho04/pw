@@ -9,6 +9,7 @@
 
 <%
     request.setCharacterEncoding("UTF-8");
+    ConexionMySQL db = new ConexionMySQL();
 
     String mensaje = "";
     String tipoMensaje = "ok";
@@ -20,17 +21,16 @@
         if (nombre == null) nombre = "";
         if (password == null) password = "";
 
-        if (nombre.trim().isEmpty() || password.trim().isEmpty()) {
-            mensaje = "Nombre de usuario y contraseña son obligatorios.";
+        if (db.existeUsuario(nombre)) {
+            mensaje = "Ese nombre de usuario ya está ocupado.";
             tipoMensaje = "error";
         } else {
-            ConexionMySQL db = new ConexionMySQL();
             boolean ok = db.registrarUsuario(nombre, password, "cliente");
             if (ok) {
                 mensaje = "Cuenta creada correctamente. Ahora puedes iniciar sesión.";
                 tipoMensaje = "ok";
             } else {
-                mensaje = "No se pudo crear la cuenta (¿nombre ya existe?).";
+                mensaje = "Ocurrió un error al crear la cuenta.";
                 tipoMensaje = "error";
             }
         }
@@ -42,7 +42,6 @@
     <meta charset="UTF-8">
     <title>Crear cuenta - Burritows</title>
     <link rel="stylesheet" href="CSS/estilos.css">
-    <!-- jQuery para el AJAX -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
@@ -72,14 +71,13 @@
             </div>
         <% } %>
 
-        <!-- FORMULARIO -->
+       
         <form action="registroCliente.jsp" method="POST" class="form-gestion">
             <fieldset>
                 <legend>Datos de la cuenta</legend>
 
                 <label for="nombre">Nombre de usuario:</label>
                 <input type="text" id="nombre" name="nombre" required>
-                <!-- Aquí mostramos el mensaje del AJAX -->
                 <div id="mensaje-usuario" style="margin-top:5px; font-weight:bold;"></div>
 
                 <label for="password">Contraseña:</label>
@@ -100,10 +98,8 @@
     </main>
 </div>
 
-<!-- SCRIPT AJAX -->
 <script>
     $(document).ready(function () {
-        // Cuando el usuario escribe o deja de escribir en el campo nombre
         $("#nombre").on("blur keyup", function () {
             let nombre = $("#nombre").val().trim();
 
@@ -115,8 +111,6 @@
                     .text("El nombre de usuario no puede ir vacío.");
                 return;
             }
-
-            // Llamada AJAX a verificarUsuario.jsp
             $.ajax({
                 url: "verificarUsuario.jsp",
                 method: "GET",

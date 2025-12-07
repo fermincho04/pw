@@ -1,7 +1,7 @@
 <%-- 
     Document   : verificarUsuario
     Created on : 23 nov 2025, 22:16:47
-    Author     : Fer_ITM
+    Author     : EsthelaHC
 --%>
 
 <%@ page contentType="text/plain; charset=UTF-8" language="java" %>
