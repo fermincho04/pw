@@ -22,11 +22,11 @@
         <header>
             <h1>Nuestro Menú</h1>
             <nav>
-                <a href="index.html">Inicio</a>
-                <a href="Menu.jsp">Menú</a>
-                <a href="contacto.html">Contacto</a>
-                <a href="cuenta.jsp">Cuenta</a>
-                <a href="login.jsp">Iniciar sesión</a>
+                <a href="/index.html">Inicio</a>
+                <a href="/Menu.jsp">Menú</a>
+                <a href="/contacto.html">Contacto</a>
+                <a href="/cuenta.jsp">Cuenta</a>
+                <a href="/login.jsp">Iniciar sesión</a>
             </nav>
             <p>¡Todo preparado al momento con los mejores ingredientes!</p>
         </header>

@@ -28,11 +28,11 @@
 <body>
 <header>
     <nav>
-        <a href="index.html">Inicio</a>
-        <a href="Menu.jsp">Menú</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="cuenta.jsp">Cuenta</a>
-        <a href="logout.jsp">Cerrar sesión</a>
+        <a href="/index.html">Inicio</a>
+        <a href="/Menu.jsp">Menú</a>
+        <a href="/contacto.html">Contacto</a>
+        <a href="/cuenta.jsp">Cuenta</a>
+        <a href="/logout.jsp">Cerrar sesión</a>
     </nav>
 </header>
 

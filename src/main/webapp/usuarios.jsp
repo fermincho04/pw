@@ -78,12 +78,12 @@
 <body>
 <header>
     <nav>
-        <a href="index.html">Inicio</a>
-        <a href="Menu.jsp">Menú</a>
-        <a href="contacto.html">Contacto</a>
-        <a href="gestionar.jsp">Gestionar Productos</a>
-        <a href="usuarios.jsp">Usuarios</a>
-        <a href="logout.jsp">Cerrar sesión</a>
+        <a href="/index.html">Inicio</a>
+        <a href="/Menu.jsp">Menú</a>
+        <a href="/contacto.html">Contacto</a>
+        <a href="/gestionar.jsp">Gestionar Productos</a>
+        <a href="/usuarios.jsp">Usuarios</a>
+        <a href="/logout.jsp">Cerrar sesión</a>
     </nav>
 </header>
 

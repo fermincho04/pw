@@ -143,10 +143,10 @@
 <body>
     <header>
         <nav>
-            <a href="index.html">Inicio</a>
-            <a href="Menu.jsp">Menú</a>
-            <a href="contacto.html">Contacto</a>
-            <a href="gestionar.jsp">Gestionar</a>
+            <a href="/index.html">Inicio</a>
+            <a href="/Menu.jsp">Menú</a>
+            <a href="/contacto.html">Contacto</a>
+            <a href="/gestionar.jsp">Gestionar</a>
         </nav>
     </header>
 
