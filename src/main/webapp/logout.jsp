@@ -7,5 +7,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%
     session.invalidate();             // borramos todo lo de la sesión
-    response.sendRedirect("login.jsp");
+    response.sendRedirect("/login.jsp");
 %>

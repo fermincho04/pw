@@ -14,7 +14,7 @@
 
     // Si no hay usuario logueado, mandamos a login
     if (nombreSesion == null || rolSesion == null) {
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("/login.jsp");
         return;
     }
 %>
@@ -48,13 +48,13 @@
         <% if ("admin".equals(rolSesion)) { %>
             <h2>Opciones de administrador</h2>
             <ul>
-                <li><a href="gestionar.jsp">Gestionar productos</a></li>
-                <li><a href="usuarios.jsp">Control de usuarios</a></li>
+                <li><a href="/gestionar.jsp">Gestionar productos</a></li>
+                <li><a href="/usuarios.jsp">Control de usuarios</a></li>
             </ul>
         <% } else { %>
             <h2>Opciones de cliente</h2>
             <ul>
-                <li><a href="Menu.jsp">Ver menú de burritos y bebidas</a></li>
+                <li><a href="/Menu.jsp">Ver menú de burritos y bebidas</a></li>
                 <!-- Aquí podrías agregar más cosas en el futuro (historial de pedidos, etc.) -->
             </ul>
         <% } %>

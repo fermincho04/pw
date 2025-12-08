@@ -22,14 +22,18 @@ import java.security.MessageDigest;
  * @author Fer_ITM
  */
 public class ConexionMySQL {
-    public String driver = "com.mysql.cj.jdbc.Driver";
+    public String driver   = "com.mysql.cj.jdbc.Driver";
     public String database = "burritos";
     public String hostname = "localhost";
-    public String port = "3306";
-    public String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database 
+    public String port     = "3306";
+
+    public String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database
                         + "?useSSL=false&serverTimezone=UTC";
-    public String username = "root";
-    public String password = "";
+
+    // NUEVO: usamos el usuario específico de la app
+    public String username = "burrito_user";
+    public String password = "BurritoPwd123";
+
     
     public Connection conectarMySQL() {
         Connection conn = null;

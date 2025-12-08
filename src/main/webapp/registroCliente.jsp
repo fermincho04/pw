@@ -93,7 +93,7 @@
         </form>
 
         <p style="margin-top:15px;">
-            ¿Ya tienes cuenta? <a href="login.jsp">Inicia sesión aquí</a>.
+            ¿Ya tienes cuenta? <a href="/login.jsp">Inicia sesión aquí</a>.
         </p>
     </main>
 </div>
